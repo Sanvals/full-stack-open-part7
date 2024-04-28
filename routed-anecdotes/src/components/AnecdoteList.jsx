@@ -1,8 +1,22 @@
 import { useParams, Link } from "react-router-dom";
+import { deleteAnecdote, addVote } from "../reducers/anecdoteReducer";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AnecdoteList = ({ anecdotes }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const content = anecdotes.find((a) => a.id === Number(id));
+
+  const del = (id) => {
+    dispatch(deleteAnecdote(id));
+    navigate("/");
+  }
+
+  const vote = (id) => {
+    dispatch(addVote(id));
+  }
 
   if (content) {
     return (
@@ -10,7 +24,10 @@ const AnecdoteList = ({ anecdotes }) => {
       <h2>Anecdote details</h2>
       <strong>{content.content}</strong> by <i>{content.author}</i>
       <div>
-        <button>vote</button><button>delete</button>
+        Has {content.votes} votes
+      </div>
+      <div>
+        <button onClick={() => vote(content.id)}>vote</button><button onClick={() => del(content.id)}>delete</button>
       </div>
     </>
   );

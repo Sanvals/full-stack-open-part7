@@ -29,9 +29,16 @@ const anecdoteSlice = createSlice({
         addVote (state, action) {
           const id = action.payload
           const anecdote = state.map(a => a.id !== id ? a : { ...a, votes: a.votes + 1 })
+          return anecdote
+        },
+        deleteAnecdote (state, action) {
+          console.log("called deleteAnecdote")
+          const id = action.payload
+          const anecdote = state.filter(a => a.id !== id)
+          return anecdote
         }
     }
 })
 
-export const { addAnecdote, addVote } = anecdoteSlice.actions
+export const { addAnecdote, addVote, deleteAnecdote } = anecdoteSlice.actions
 export default anecdoteSlice.reducer

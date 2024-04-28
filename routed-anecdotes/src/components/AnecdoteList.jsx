@@ -5,7 +5,15 @@ const AnecdoteList = ({ anecdotes }) => {
   const content = anecdotes.find((a) => a.id === Number(id));
 
   if (content) {
-    return <h2>{content.content}</h2>;
+    return (
+      <>
+      <h2>Anecdote details</h2>
+      <strong>{content.content}</strong> by <i>{content.author}</i>
+      <div>
+        <button>vote</button><button>delete</button>
+      </div>
+    </>
+  );
   }
 
   return (

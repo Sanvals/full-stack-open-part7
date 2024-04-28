@@ -2,11 +2,15 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AnecdoteList from "./AnecdoteList";
 import CreateNew from "./CreateNew";
 import About from "./About";
+import { useSelector } from "react-redux";
 
-const Menu = ({ anecdotes, addNew, addNotification }) => {
+const Menu = ({ addNew, addNotification }) => {
+  const anecdotes = useSelector((state) => state.anecdote)
+  
   const padding = {
     paddingRight: 5,
   };
+  
   return (
     <Router>
       <div>

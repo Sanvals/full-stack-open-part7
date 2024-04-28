@@ -18,3 +18,16 @@ export const useField = (type) => {
     reset,
   };
 };
+
+export const useLogin = (type) => {
+  const [value, setValue] = useState("");
+
+  const onChange = (event) => {
+    setValue(event.target.value);
+  }
+  return {
+    type,
+    value,
+    onChange
+  }
+}

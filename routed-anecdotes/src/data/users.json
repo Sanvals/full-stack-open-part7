@@ -1,0 +1,14 @@
+[
+  {
+    "username": "mluukkai",
+    "name": "Matti Luukkainen",
+    "password": "salainen",
+    "id": 1
+  },
+  {
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen",
+    "id": 2
+  }
+]

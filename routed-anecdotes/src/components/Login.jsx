@@ -1,10 +1,8 @@
 import { useLogin } from "../hooks/index";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../reducers/userReducer";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const name = useLogin("text");
   const pass = useLogin("password");
@@ -16,7 +14,6 @@ const Login = () => {
       password: pass.value
     }
     dispatch(setLogin(payload));
-    navigate("/");
   }
 
   return (

@@ -1,35 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Login from "../components/Login";
-
-const users = [
-    {
-        username: 'mluukkai',
-        name: 'Matti Luukkainen',
-        password: 'salainen'
-    },
-    {
-        username: 'root',
-        name: 'Superuser',
-        password: 'salainen'
-    }
-]
+import users from "../data/users"
 
 const userSlicer = createSlice({
     name: 'user',
-    initialState: false,
+    initialState: { user: null, loggedIn: false},
     reducers: {
         setLogin(state, action) {
             const { username, password } = action.payload
-            const user = users.map(user => user.username === username && user.password === password)
+            const user = users.filter(user => user.username === username && user.password === password)
             console.log(user)
-            if (user) {
-                return true
+            if (user.length === 1) {
+                return { user: user[0].username, loggedIn: false }
             } else {
-                return false
+                return { user: null, loggedIn: false }
             }
         },
         logOut(state, action) {
-            return false
+            return { user: null, loggedIn: false }
         }
     }
 })

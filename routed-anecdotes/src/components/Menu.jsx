@@ -3,9 +3,12 @@ import AnecdoteList from "./AnecdoteList";
 import CreateNew from "./CreateNew";
 import About from "./About";
 import Login from "./Login";
+import Users from "./Users";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logOut } from "../reducers/userReducer";
+import { useEffect } from "react";
+import { arrangeNotification } from "../reducers/notificationReducer";
 
 const Menu = ({ addNew, addNotification }) => {
   const dispatch = useDispatch()
@@ -18,7 +21,14 @@ const Menu = ({ addNew, addNotification }) => {
 
   const out = () => {
     dispatch(logOut())
+    dispatch(arrangeNotification('Logged out!', 5000))
   }
+  
+  useEffect(() => {
+    if (user.user) {
+      dispatch(arrangeNotification(`Logged as ${user.user}`, 5000))
+    }
+  }, [user])
   
   return (
     <Router>
@@ -26,8 +36,10 @@ const Menu = ({ addNew, addNotification }) => {
         <Link style={padding} to="/">
           anecdotes
         </Link>
-        { user && <Link style={padding} to="/create">create new</Link>}
+        { user.user && <Link style={padding} to="/create">create new</Link> }
+        <Link style={padding} to="/users">users</Link>
         <Link style={padding} to="/about">about</Link>
+        { user.user && <button onClick={out}>logout</button> }
       </div>
       <Routes>
         <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
@@ -38,10 +50,10 @@ const Menu = ({ addNew, addNotification }) => {
             <CreateNew addNew={addNew} addNotification={addNotification} />
           }
         />
+        <Route path="/users" element={<Users />} />
         <Route path="/about" element={<About />} />
       </Routes>
-      {!user && <Login />}
-      {user && <button onClick={out}>logout</button>}
+      {!user?.user && <Login />}
     </Router>
   );
 };

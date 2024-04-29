@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 const AnecdoteList = ({ anecdotes }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const content = anecdotes.find((a) => a.id === Number(id));
+  const { id, user } = useParams();
 
   const del = (id) => {
     dispatch(deleteAnecdote(id));
@@ -18,17 +17,34 @@ const AnecdoteList = ({ anecdotes }) => {
     dispatch(addVote(id));
   }
 
-  if (content) {
+  if (id) {
+    const content = anecdotes.find((a) => a.id === Number(id));
     return (
       <>
       <h2>Anecdote details</h2>
       <strong>{content.content}</strong> by <i>{content.author}</i>
+      <div><a href={content.info}>{content.info}</a></div>
       <div>
         Has {content.votes} votes
       </div>
       <div>
         <button onClick={() => vote(content.id)}>vote</button><button onClick={() => del(content.id)}>delete</button>
       </div>
+    </>
+  );
+  }
+
+  if (user) {
+    const byUser = anecdotes.filter((a) => a.author === user);
+    console.log(byUser)
+    return (
+      <>
+      <h2>Anecdotes by {user}</h2>
+      {byUser.map((a) => (
+          <li key={a.id}>
+            <Link to={`/${a.id}`}>{a.content}</Link>
+          </li>
+        ))}
     </>
   );
   }

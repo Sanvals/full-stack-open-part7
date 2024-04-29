@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import anecdotes from "../data/anecdotes"
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const Users = () => {
-  const authorsList = anecdotes.map(a => a.author)
-  console.log(anecdotes.map(a => a.author === authorsList[0]).length)
+  const authorsList = [... new Set(anecdotes.map(a => a.author))]
   return (
     <div>
       <h2>Users</h2>
@@ -19,7 +19,7 @@ const Users = () => {
             authorsList.map(author => {
               return (
                 <tr key={author}>
-                  <td>{author}</td>
+                  <td><Link to={`/users/${author}`}>{author}</Link></td>
                   <td>{anecdotes.map(a => a.author === author).length}</td>
                 </tr>
               )

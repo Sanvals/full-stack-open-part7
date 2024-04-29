@@ -1,16 +1,37 @@
 [
   {
     "content": "If it hurts, do it more often",
-    "author": "Jez Humble",
+    "author": "Jez",
     "info": "https://martinfowler.com/bliki/FrequencyReducesDifficulty.html",
     "votes": 0,
     "id": 1
   },
   {
     "content": "Premature optimization is the root of all evil",
-    "author": "Donald Knuth",
+    "author": "Knuth",
     "info": "http://wiki.c2.com/?PrematureOptimization",
     "votes": 0,
     "id": 2
+  },
+  {
+    "content": "Lorem Ipsum",
+    "author": "Knuth",
+    "info": "http://www.google.es/",
+    "votes": 0,
+    "id": 3
+  },
+  {
+    "content": "Canvas is awesome",
+    "author": "Knuth",
+    "info": "http://www.reddit.com",
+    "votes": 0,
+    "id": 4
+  },
+  {
+    "content": "Google Search for dummies",
+    "author": "Jez",
+    "info": "http://wiki.c2.com/?PrematureOptimization",
+    "votes": 0,
+    "id": 5
   }
 ]

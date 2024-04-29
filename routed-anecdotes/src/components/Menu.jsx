@@ -50,6 +50,7 @@ const Menu = ({ addNew, addNotification }) => {
             <CreateNew addNew={addNew} addNotification={addNotification} />
           }
         />
+        <Route path="/users/:user" element={<AnecdoteList anecdotes={anecdotes} />} />
         <Route path="/users" element={<Users />} />
         <Route path="/about" element={<About />} />
       </Routes>

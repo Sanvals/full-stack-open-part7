@@ -3,30 +3,43 @@ import { useSelector } from "react-redux"
 import anecdotes from "../data/anecdotes"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 const Users = () => {
   const authorsList = [... new Set(anecdotes.map(a => a.author))]
+
   return (
     <div>
       <h2>Users</h2>
       <ul>
-        <table>
-          <tbody>
-            <tr>
-              <th>Username</th>
-              <th>Anecdotes created</th>
-            </tr>
+        <TableContainer component={Paper}>
+          <Table sx={{minWidth: 650}} size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Username</TableCell>
+              <TableCell align="center">Anecdotes created</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {
             authorsList.map(author => {
               return (
-                <tr key={author}>
-                  <td><Link to={`/users/${author}`}>{author}</Link></td>
-                  <td>{anecdotes.map(a => a.author === author).length}</td>
-                </tr>
+                <TableRow key={author}>
+                  <TableCell component={Link} to={`/users/${author}`} scope="row">{author}</TableCell>
+                  <TableCell>{anecdotes.map(a => a.author === author).length}</TableCell>
+                </TableRow>
               )
             })
             }
-          </tbody>
-        </table>
+          </TableBody>
+          </Table>
+        </TableContainer>
       </ul>
     </div>
   )

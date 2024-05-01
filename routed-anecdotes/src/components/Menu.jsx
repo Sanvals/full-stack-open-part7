@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../reducers/userReducer";
 import { useEffect } from "react";
 import { arrangeNotification } from "../reducers/notificationReducer";
+import { AppBar, Toolbar, Button } from "@mui/material";
 
 const Menu = ({ addNew, addNotification }) => {
   const dispatch = useDispatch()
@@ -31,16 +32,23 @@ const Menu = ({ addNew, addNotification }) => {
   }, [user])
   
   return (
-    <Router>
-      <div>
-        <Link style={padding} to="/">
-          anecdotes
-        </Link>
-        { user.user && <Link style={padding} to="/create">create new</Link> }
-        <Link style={padding} to="/users">users</Link>
-        <Link style={padding} to="/about">about</Link>
-        { user.user && <button onClick={out}>logout</button> }
-      </div>
+    <>
+    <Router>  
+      <AppBar position = "static">
+        <Toolbar>
+          <Button color="inherit" component={Link} to="/">anecdotes</Button>
+            { 
+              user.user && 
+              <Button color="inherit" component={Link} to="/create">create new</Button>
+            }
+            <Button color="inherit" component={Link} to="/users">users</Button>
+            <Button color="inherit" component={Link} to="/about">about</Button>
+            {
+              user.user &&
+                <Button color="inherit" onClick={out}>logout</Button>
+            }
+        </Toolbar>
+      </AppBar>
       <Routes>
         <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
         <Route path="/:id" element={<AnecdoteList anecdotes={anecdotes} />} />
@@ -49,13 +57,14 @@ const Menu = ({ addNew, addNotification }) => {
           element={
             <CreateNew addNew={addNew} addNotification={addNotification} />
           }
-        />
+          />
         <Route path="/users/:user" element={<AnecdoteList anecdotes={anecdotes} />} />
         <Route path="/users" element={<Users />} />
         <Route path="/about" element={<About />} />
       </Routes>
-      {!user?.user && <Login />}
     </Router>
+      {!user?.user && <Login />}
+    </>
   );
 };
 

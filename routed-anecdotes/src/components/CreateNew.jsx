@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useField } from "../hooks";
 import { addAnecdote } from "../reducers/anecdoteReducer";
 import { useDispatch } from "react-redux";
+import { arrangeNotification } from "../reducers/notificationReducer";
 
 const CreateNew = ({ addNew }) => {
   const dispatch = useDispatch()
@@ -19,6 +20,8 @@ const CreateNew = ({ addNew }) => {
       info: info.value,
       votes: 0,
     }))
+
+    dispatch(arrangeNotification(`Added ${content.value}`, 5000))
 
     navigate("/");
   };

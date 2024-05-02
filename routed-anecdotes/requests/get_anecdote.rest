@@ -1,0 +1,10 @@
+POST http://localhost:3001/
+
+{
+    "content": "Data loaded correctly",
+    "author": "Jez",
+    "info": "http://wiki.c2.com/?PrematureOptimization",
+    "comments": [],
+    "id": 7
+}
+

@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
-import anecdotes from "../data/anecdotes"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Table from '@mui/material/Table';
@@ -12,7 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const Users = () => {
+  const anecdotes = useSelector((state) => state.anecdote)
   const authorsList = [... new Set(anecdotes.map(a => a.author))]
+
+  // console.log(anecdotes.filter(a => a.author === "Jez").length)
 
   return (
     <div>
@@ -32,7 +33,7 @@ const Users = () => {
               return (
                 <TableRow key={author}>
                   <TableCell component={Link} to={`/users/${author}`} scope="row">{author}</TableCell>
-                  <TableCell>{anecdotes.map(a => a.author === author).length}</TableCell>
+                  <TableCell>{anecdotes.filter(a => a.author === author).length}</TableCell>
                 </TableRow>
               )
             })

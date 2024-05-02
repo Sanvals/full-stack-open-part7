@@ -1,17 +1,21 @@
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
+
 import { Container } from "@mui/material";
-
-
 import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+
+import { initializeAnecdotes } from "./reducers/anecdoteReducer";
+import { useDispatch } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch()
   const notification = useSelector(state => state.notification)
-  const oldNotification = (
-    <div>{useSelector(state => state.notification)}</div>
-  )
+
+  useEffect(() => {
+    dispatch(initializeAnecdotes())
+  }, [dispatch])
 
   return (
     <Container>

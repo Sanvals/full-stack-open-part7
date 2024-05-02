@@ -16,10 +16,6 @@ const Menu = ({ addNew, addNotification }) => {
   const anecdotes = useSelector((state) => state.anecdote)
   const user = useSelector((state) => state.user)
 
-  const padding = {
-    paddingRight: 5,
-  };
-
   const out = () => {
     dispatch(logOut())
     dispatch(arrangeNotification('Logged out!', 5000))

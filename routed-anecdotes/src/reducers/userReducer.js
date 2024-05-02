@@ -8,7 +8,7 @@ const userSlicer = createSlice({
         setLogin(state, action) {
             const { username, password } = action.payload
             const user = users.filter(user => user.username === username && user.password === password)
-            console.log(user)
+            // console.log(user)
             if (user.length === 1) {
                 return { user: user[0].username, loggedIn: false }
             } else {

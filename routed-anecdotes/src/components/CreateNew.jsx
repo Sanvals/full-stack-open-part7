@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useField } from "../hooks";
-import { addAnecdote } from "../reducers/anecdoteReducer";
+import { createAnecdote } from "../reducers/anecdoteReducer";
 import { useDispatch } from "react-redux";
 import { arrangeNotification } from "../reducers/notificationReducer";
 
@@ -14,11 +14,12 @@ const CreateNew = ({ addNew }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addAnecdote({
+    dispatch(createAnecdote({
       content: content.value,
       author: author.value,
       info: info.value,
-      votes: 0,
+      comments: [],
+      votes: 0
     }))
 
     dispatch(arrangeNotification(`Added ${content.value}`, 5000))
